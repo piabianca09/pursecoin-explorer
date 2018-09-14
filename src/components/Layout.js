@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Route, Link, Switch } from "react-router-dom";
+import { Route, Link, Switch } from "react-router-dom";
 import { Layout, Menu, Icon } from "antd";
 import HomeComponent from "./Home";
 import FaucetComponent from "./Faucet";
@@ -117,8 +117,8 @@ class LayoutComponent extends Component {
             </Menu.Item>
           </Menu>
         </Sider>
-        <Layout style={{ padding: 25, backgroundColor:'#FFF'}}>
-          <Content>
+        <Layout style={{ padding: '25', background:'#FFF'}}>
+          <Content >
               <Switch>
                 <Route exact path="/" component={HomeComponent} />
                 <Route path="/faucet" component={FaucetComponent} />
@@ -140,6 +140,7 @@ class LayoutComponent extends Component {
                   component={ConfirmedTransactionsComponent}
                 />
               </Switch>
+              {/* <h1>tset</h1> */}
           </Content>
         </Layout>
       </Layout>
