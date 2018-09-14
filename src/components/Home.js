@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Card, Timeline, Button  } from 'antd';
-import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-dom";
+import { Card, Timeline } from 'antd';
 
 class Home extends Component {
   state = {
@@ -13,9 +12,9 @@ class Home extends Component {
         <div style={{marginBottom: '30px'}}>
           <Card type="inner" title="LATEST TRANSACTIONS" extra={<a href="/transactions/pending">View More Transactions</a>}>
               <Timeline pending="Fetching..." reverse={this.state.reverse}>
-                <Timeline.Item color="green">Create a services site 2015-09-01</Timeline.Item>
-                <Timeline.Item color="green">Solve initial network problems 2015-09-01</Timeline.Item>
-                <Timeline.Item color="green">Technical testing 2015-09-01</Timeline.Item>
+                <Timeline.Item color="green">96aee82859b37843cbb97d731f1b2431de23d5aa9f726feb6dc9675039584138</Timeline.Item>
+                <Timeline.Item color="green">96aee82859b37843cbb97d731f1b2431de23d5aa9f726feb6dc9675039584138</Timeline.Item>
+                <Timeline.Item color="green">96aee82859b37843cbb97d731f1b2431de23d5aa9f726feb6dc9675039584138</Timeline.Item>
               </Timeline>
           </Card>
         </div>

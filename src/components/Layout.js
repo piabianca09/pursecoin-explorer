@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Switch, withRouter } from "react-router-dom";
+import { BrowserRouter as Route, Link, Switch } from "react-router-dom";
 import { Layout, Menu, Icon } from "antd";
 import HomeComponent from "./Home";
 import FaucetComponent from "./Faucet";
@@ -11,7 +10,7 @@ import PendingTransactionsComponent from "./transaction/pending_transactions";
 import BlocksComponent from "./Blocks";
 
 const { SubMenu } = Menu;
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Sider } = Layout;
 
 class LayoutComponent extends Component {
   state = {
@@ -118,7 +117,7 @@ class LayoutComponent extends Component {
             </Menu.Item>
           </Menu>
         </Sider>
-        <Layout style={{ padding: 25 }}>
+        <Layout style={{ padding: 25, backgroundColor:'#FFF'}}>
           <Content>
               <Switch>
                 <Route exact path="/" component={HomeComponent} />
@@ -142,9 +141,6 @@ class LayoutComponent extends Component {
                 />
               </Switch>
           </Content>
-          <Footer style={{ textAlign: "center" }}>
-            Pursecoin ©2018
-          </Footer>
         </Layout>
       </Layout>
     );

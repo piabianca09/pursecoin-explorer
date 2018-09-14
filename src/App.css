@@ -1,3 +1,5 @@
+@import "antd/dist/antd.css";
+
 .App {
   text-align: center;
 }
@@ -29,10 +31,4 @@
   to {
     transform: rotate(360deg);
   }
-}
-
-@import "antd/dist/antd.css";
-
-.latestTransactions-div {
-  border: 10px,
 }

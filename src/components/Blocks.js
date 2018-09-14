@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { List, Card, Divider } from 'antd';
+import React from "react";
+import { Card, Divider } from 'antd';
 
-const data = [
+const items = [
   {
     key: "1",
     number: 547237,
@@ -24,28 +24,29 @@ const data = [
   }
 ];
 
-class Blocks extends Component {
-  state = {};
-  render() {
-    return (
+const Items = () => {
+  return(
+    <div>
+    {
+      items.map( item => 
+        <div className="block">
+          <Card title={`Block Number: ${item.number}`}>
+            <p> {item.timestamp} </p>
+            <p> {`${item.transactions} transactions`} </p>
+            <p> {`${item.size} bytes`} </p>
+          </Card>
+        </div>
+    )
+  }
+  </div>
+  )}
+
+const Blocks = () =>  {
+  return (
       <div>
         <Divider orientation="left"><h1>BLOCKS</h1></Divider>
-          <List
-            grid={{ gutter: 16, column: 4 }}
-            dataSource={data}
-            renderItem={item => (
-              <List.Item>
-                <Card title={`Block Number: ${item.number}`}>
-                  <p> {item.timestamp} </p>
-                  <p> {`${item.transactions} transactions`} </p>
-                  <p> {`${item.size} bytes`} </p>
-                </Card>
-              </List.Item>
-            )} 
-          />
+        <Items />
       </div>
-    );
-  }
-}
+)}
 
 export default Blocks;
