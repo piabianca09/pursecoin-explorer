@@ -1,39 +1,18 @@
-import React from "react";
+import React, {Component} from "react";
+import axios from 'axios'
 import { Card, Divider } from 'antd';
 
-const items = [
-  {
-    key: "1",
-    number: 547237,
-    timestamp: "Sep 10, 2018 5:12:53 PM",
-    transactions: 27,
-    size: 7302
-  },
-  {
-    key: "2",
-    number: 547236,
-    timestamp: "Sep 10, 2018 5:12:51 PM",
-    transactions: 5,
-    size: 16884
-  },
-  {
-    number: 547235,
-    timestamp: "Sep 10, 2018 5:12:48 PM",
-    transactions: 50,
-    size: 48955
-  }
-];
-
-const Items = () => {
+const BlockList = (props) => {
+  const {blocks} = props
   return(
     <div>
     {
-      items.map( item => 
-        <div className="block">
-          <Card title={`Block Number: ${item.number}`}>
-            <p> {item.timestamp} </p>
-            <p> {`${item.transactions} transactions`} </p>
-            <p> {`${item.size} bytes`} </p>
+      blocks.map(block => 
+        <div className="block" key={block.blockHash}>
+          <Card title={`Block Hash: ${block.blockHash}`}>
+            <p> {block.dateCreated} </p>
+            <p> {` Transaction Data Hash: ${block.blockDataHash}`} </p>
+            <p> {`Mined by: ${block.minedBy}`} </p>
           </Card>
         </div>
     )
@@ -41,12 +20,33 @@ const Items = () => {
   </div>
   )}
 
-const Blocks = () =>  {
-  return (
-      <div>
-        <Divider orientation="left"><h1>BLOCKS</h1></Divider>
-        <Items />
-      </div>
-)}
+class Blocks extends Component {
+  state = {
+    blocks: [],
+    error: null
+  }
+
+  componentWillMount() {
+      const node = localStorage.getItem('node')
+      const blocksUrl = `${node}/blocks`
+      axios.get(blocksUrl)
+        .then(response => {
+            console.log(response.data.blocks)
+          this.setState({blocks: response.data.blocks})
+        })
+        .catch(err => {
+            this.setState({error: err.data})
+        })
+  }
+
+  render() {
+    return (
+        <div>
+          <Divider orientation="left"><h1>BLOCKS</h1></Divider>
+          <BlockList blocks={this.state.blocks}/>
+        </div>
+  )
+  }
+}
 
 export default Blocks;

@@ -7,7 +7,9 @@ import CreateWalletComponent from "./wallet/CreateWallet";
 import ViewWalletComponent from "./wallet/ViewWallet";
 import ConfirmedTransactionsComponent from "./transaction/confirmed_transactions";
 import PendingTransactionsComponent from "./transaction/pending_transactions";
+import CreateTransaction from '../components/transaction/create_transaction'
 import BlocksComponent from "./Blocks";
+import ViewBalance from './wallet/Balance'
 
 const { SubMenu } = Menu;
 const { Content, Sider } = Layout;
@@ -56,6 +58,16 @@ class LayoutComponent extends Component {
                 </span>
               }
             >
+            <Menu.Item key="create_Transaction">
+                <span>
+                    <Icon type="file-done" />
+                    <span>
+                        <Link to="/transactions/create">
+                            Create Transaction
+                        </Link>
+                    </span>
+                </span>
+            </Menu.Item>
               <Menu.Item key="confirmed_transaction">
                 <span>
                   <Icon type="file-done" />
@@ -84,6 +96,14 @@ class LayoutComponent extends Component {
                 </span>
               }
             >
+              <Menu.Item key="view-balance">
+                <span>
+                  <Icon type="plus" />
+                  <span>
+                    <Link to="/wallet/view-balance">Balance</Link>
+                  </span>
+                </span>
+              </Menu.Item>
               <Menu.Item key="create_wallet">
                 <span>
                   <Icon type="plus" />
@@ -121,8 +141,14 @@ class LayoutComponent extends Component {
           <Content >
               <Switch>
                 <Route exact path="/" component={HomeComponent} />
-                <Route path="/faucet" component={FaucetComponent} />
+                <Route exact path="/faucet" component={FaucetComponent} />
                 <Route
+                  exact
+                  path="/wallet/view-balance"
+                  component={ViewBalance}
+                />
+                <Route
+                  exact
                   path="/wallet/creat-wallet"
                   component={CreateWalletComponent}
                 />
@@ -132,10 +158,17 @@ class LayoutComponent extends Component {
                 />
                 <Route path="/blocks" component={BlocksComponent} />
                 <Route
+                  exact
+                  path="/transactions/create"
+                  component={CreateTransaction}
+                />
+                <Route
+                  exact
                   path="/transactions/pending"
                   component={PendingTransactionsComponent}
                 />
                 <Route
+                  exact
                   path="/transactions/confirmed"
                   component={ConfirmedTransactionsComponent}
                 />
