@@ -35,9 +35,8 @@ class Balance extends Component {
     }
 
     printBalance() {
-        console.log(this.state.error)
         if(this.state.error) {
-            return this.state.error
+            return `Your current balance is: 0`
         } 
 
         return `Your current balance is: ${this.state.balance}`

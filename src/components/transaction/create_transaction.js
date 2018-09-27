@@ -1,22 +1,54 @@
 import React, { Component } from "react";
 import { Divider, Row, Col, Input, Button, Card } from "antd";
 import Wallet from '../../wallet';
+import axios from 'axios'
 
 class CreateTransaction extends Component {
   state = {
     to:'',
     value: 0,
     fee:0,
+    dateCreated: '',
     data: '',
-    senderSignature: [undefined, undefined]
+    senderSignature: [undefined, undefined],
+    newTransaction: {},
+    error: null
   };
 
   sendTransaction() {
-    
-  }
+    const node = localStorage.getItem('node')
+    const sendTransactionUrl = `${node}/transaction`
+
+    const {
+        to,
+        value,
+        fee,
+        dateCreated,
+        data,
+        senderSignature,
+    } = this.state
+
+    const {pubAddress, pubKey} = JSON.parse(localStorage.getItem('walletKeys'))
+
+    const transaction = {
+        from: pubAddress,
+        to,
+        value: parseInt(value),
+        fee: parseInt(to),
+        dateCreated,
+        data,
+        senderPubKey:pubKey,
+        senderSignature,
+    }
+
+    axios.post(sendTransactionUrl, transaction)
+        .then(res => this.setState({newTransaction: res.data.newTransaction, error: null}))
+        .catch(err => this.setState({error: err}))
+  } 
 
   signTransaction() {
     const dateCreated = new Date().toISOString()
+    this.setState({dateCreated})
     const {
         privKey,
         pubAddress,
